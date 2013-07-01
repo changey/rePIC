@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>5144EBB9-7E8F-45A7-8515-51D37E921F08</string>
+	<key>IDESourceControlProjectName</key>
+	<string>NB_list</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AED2CA33-525A-4058-8355-13980B79C58D</key>
+		<string>ssh://github.com/weihuali0509/ProjectAwesome.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>NB_list.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AED2CA33-525A-4058-8355-13980B79C58D</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>ssh://github.com/weihuali0509/ProjectAwesome.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AED2CA33-525A-4058-8355-13980B79C58D</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AED2CA33-525A-4058-8355-13980B79C58D</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ProjectAwesome_angelhack copy</string>
+		</dict>
+	</array>
+</dict>
+</plist>
