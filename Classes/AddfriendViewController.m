@@ -7,6 +7,7 @@
 //
 
 #import "AddfriendViewController.h"
+#import "User2.h"
 
 @interface AddfriendViewController ()
 
@@ -17,6 +18,45 @@
 @synthesize txtf;
 
 -(IBAction)add{
+    
+    User2 *user =[User2 sharedUser];
+    
+    NSString *friend=txtf.text;
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@/startup/addfriend.php?user=%@&friend=%@", user.url, user.user, friend];
+    NSLog(urlString);
+    
+    
+    
+    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+    [request setURL:[NSURL URLWithString:urlString]];
+    [request setHTTPMethod:@"GET"];
+ 
+    
+    // now lets make the connection to the web
+    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+    
+    if ([returnString isEqualToString:@"0"]){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No user found"
+                                                        message:@""
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+    }
+    else{
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:[NSString stringWithFormat:@"%@ added", friend]
+                                                        message:@""
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+    }
+    NSLog(@"%@", returnString);
+    
     
 }
 

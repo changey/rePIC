@@ -118,7 +118,7 @@
     User2 *user= [User2 sharedUser];
     user.imgv.image=[[UIImage alloc] init];
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleBordered target:self action:@selector(Add:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Friends" style:UIBarButtonItemStyleBordered target:self action:@selector(Add:)];
 	[self.navigationItem setRightBarButtonItem:addButton];
     
     // Do any additional setup after loading the view from its nib.

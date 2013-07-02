@@ -183,6 +183,12 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
 //            if ([user.captions isEqualToString:@"Captions"]==false){
 //                cell.mer_name.text=user.captions;
 //            }
+            if ([user.captions isEqualToString:@"Captions"]){
+              
+            }
+            else{
+                cell.mer_name.text=user.captions;
+            }
             cell.mer_name.text=user.captions;
             cell.imgv.image=[UIImage imageNamed:@"heather.jpg"];
             cell.name.text=@"Heather Wilk";

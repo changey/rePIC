@@ -332,7 +332,7 @@
     user2.inbox=@"4";
     
     //user2.url=@"http://172.17.164.70";
-    user2.url=@"https://107.22.99.26";
+    user2.url=@"http://107.22.99.26";
     
     user.text=@"test2";
     pass.text=@"1";
