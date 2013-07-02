@@ -93,7 +93,7 @@
         user.pass=@"";
         user.pass=@"1";
         
-        user.url=@"https://54.243.144.241";
+        user.url=@"https://172.17.164.70";
 		
         
 		
@@ -162,7 +162,7 @@
     
     
     // NSString *urlString = [NSString stringWithFormat:@"https://54.243.144.241/rnlogin2.php?user=%@&pass=%@",user2,pass2];
-    user.url=@"https://54.243.144.241";
+   // user.url=@"https://54.243.144.241";
     
     NSString *url = [NSString stringWithFormat:@"%@/rnlogin2.php?user=%@&pass=%@",user.url,user2,pass2];  // server name does not match
     NSURL *URL = [NSURL URLWithString:url];
@@ -326,111 +326,22 @@
 
 - (void)viewDidLoad
 {
+    
     User2 *user2=[User2 sharedUser];
     user2.inbox=@"4";
+    
+    user2.url=@"https://172.17.164.70";
     
     user.text=@"test2";
     pass.text=@"1";
     [self.navigationController setNavigationBarHidden:YES];
     pass.returnKeyType = UIReturnKeyGo;
     
-    self.welcomePhotos = [NSArray arrayWithObjects:@"boston3.png",@"charles3.png", @"mass3.png", nil];
-    self.imageView.image = [UIImage imageNamed:[self.welcomePhotos objectAtIndex:0]];
-    [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(transitionPhotos) userInfo:nil repeats:YES];
     
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
--(void)transitionPhotos{
-    
-    if (photoCount < [self.welcomePhotos count] - 1){
-        photoCount ++;
-    }else{
-        photoCount = 0;
-    }
-    [UIView transitionWithView:self.imageView
-                      duration:2.0
-                       options:UIViewAnimationOptionTransitionCrossDissolve
-                    animations:^{ self.imageView.image = [UIImage imageNamed:[self.welcomePhotos objectAtIndex:photoCount]]; }
-                    completion:NULL];
-}
-
-#pragma mark -
-#pragma mark NSURLConnection Callbacks
-// Connection response.
-
-- (void) connection:(NSURLConnection *)connection
-didReceiveAuthenticationChallenge:(NSURLAuthenticationChallenge *)challenge {
-    
-    if ([challenge previousFailureCount] > 0) {
-        // Do something, like prompt for credentials or cancel the connection
-    } else {
-        NSURLCredential *creds = [NSURLCredential
-                                  credentialWithUser:@"someUser"
-                                  password:@"somePassword"
-                                  persistence:NSURLCredentialPersistenceForSession];
-        
-        [[challenge sender]  useCredential:creds forAuthenticationChallenge:challenge];
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    NSLog(@"%s - Response Code: %d\n", __FUNCTION__, [(NSHTTPURLResponse *)response statusCode]);
-    NSLog(@"%s - Content-Type: %@\n",  __FUNCTION__, [[(NSHTTPURLResponse *)response allHeaderFields] objectForKey:@"Content-Type"]);
-    // Clear the NSMutableData receivedData.
-    [receivedData setLength:0];
-}
-// You got data.
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    NSLog(@"%s", __FUNCTION__);
-    // Append the data to our NSMutableData receivedData.
-    [receivedData appendData:data];
-}
-// Sorry Dude, connection failed gloriously.
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    NSLog(@"%s", __FUNCTION__);
-    
-    // Create noxious error message.
-    NSString *errorMessage = [[NSString alloc]initWithFormat: @"Connection failed! Error - %@ (URL: %@)", [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]];
-    // Throw up a noxious error message.
-    UIAlertView *alert = [[UIAlertView alloc]
-                          initWithTitle:@"Sorry!"
-                          message:errorMessage
-                          delegate:self
-                          cancelButtonTitle:@"Close"
-                          otherButtonTitles:nil];
-    [alert show];
-    // Clean up
-    [connection release];
-    self.receivedData = nil;
-    [alert release];
-    [errorMessage release];
-}
-// Finally the data is completely loaded.
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSLog(@"%s", __FUNCTION__);
-    // Encode received data to NSUTF8StringEncoding
-    NSString *receviedDataAsString = [[NSString alloc] initWithData:receivedData encoding:NSUTF8StringEncoding];
-    NSLog(@"%s - receviedDataAsString: %@", __FUNCTION__, receviedDataAsString);
-    // Show received data in the responseTextView.
-    responseTextView.text = receviedDataAsString;
-    received=receviedDataAsString;
-    
-    NSLog(@"%@",receviedDataAsString);
-    // receviedDataAsString=@"lala";
-    if(receviedDataAsString==@" yes"){
-        NSLog(@"lala");
-    };
-    // Clean up.
-    [receviedDataAsString release];
-    [connection release];
-    self.receivedData = nil;
-}
 
 
 #pragma mark -

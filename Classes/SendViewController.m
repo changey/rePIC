@@ -31,6 +31,7 @@
     
     
    // NSString *urlString = @"http://107.22.99.26/startup/upload.php";
+    User2 *user=[User2 sharedUser];
     
     NSString *urlString2 = @"http://107.22.99.26/startup/schedule.php";
     
