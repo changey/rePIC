@@ -93,7 +93,8 @@
         user.pass=@"";
         user.pass=@"1";
         
-        user.url=@"https://172.17.164.70";
+        //user.url=@"https://172.17.164.70";
+        user.url=@"https://107.22.99.26";
 		
         
 		
@@ -330,7 +331,8 @@
     User2 *user2=[User2 sharedUser];
     user2.inbox=@"4";
     
-    user2.url=@"https://172.17.164.70";
+    //user2.url=@"http://172.17.164.70";
+    user2.url=@"https://107.22.99.26";
     
     user.text=@"test2";
     pass.text=@"1";

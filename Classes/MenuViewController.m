@@ -15,7 +15,7 @@
 
 @implementation MenuViewController
 
-@synthesize viewmer, viewin, viewimage, inbox_but, camera_but, img_photo;
+@synthesize viewmer, viewin, viewimage, inbox_but, camera_but, img_photo, viewadd;
 
 - (IBAction)takePhoto:(UIButton *)sender {
     
@@ -118,7 +118,24 @@
     User2 *user= [User2 sharedUser];
     user.imgv.image=[[UIImage alloc] init];
     
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add" style:UIBarButtonItemStyleBordered target:self action:@selector(Add:)];
+	[self.navigationItem setRightBarButtonItem:addButton];
+    
     // Do any additional setup after loading the view from its nib.
+}
+
+- (IBAction) Add:(id)sender{
+    
+    if(self.viewadd == nil) {
+        AddfriendViewController *secondxib =
+        [[AddfriendViewController alloc] initWithNibName:@"AddfriendViewController" bundle:[NSBundle mainBundle]];
+        self.viewadd = secondxib;
+        [secondxib release];
+    }
+    
+    [self.navigationController pushViewController:self.viewadd animated:YES];
+//	[self.navigationController popViewControllerAnimated:YES];
+    
 }
 
 - (void)didReceiveMemoryWarning

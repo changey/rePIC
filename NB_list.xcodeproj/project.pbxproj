@@ -47,6 +47,8 @@
 		0A82A3C5178006520054C71F /* homepage_plain.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A82A3C4178006520054C71F /* homepage_plain.png */; };
 		0A82A3CB17809EF50054C71F /* TPKeyboardAvoidingScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A82A3C817809EF50054C71F /* TPKeyboardAvoidingScrollView.m */; };
 		0A82A3CC17809EF50054C71F /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A82A3CA17809EF50054C71F /* TPKeyboardAvoidingTableView.m */; };
+		0ACB38291782A4E8003B3E66 /* AddfriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB38271782A4E8003B3E66 /* AddfriendViewController.m */; };
+		0ACB382A1782A4E8003B3E66 /* AddfriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ACB38281782A4E8003B3E66 /* AddfriendViewController.xib */; };
 		0AFCB9A91780A625009242CC /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9A71780A625009242CC /* check.png */; };
 		0AFCB9AA1780A625009242CC /* uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9A81780A625009242CC /* uncheck.png */; };
 		0AFCB9AD1780B0B5009242CC /* GreenBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9AB1780B0B5009242CC /* GreenBar.png */; };
@@ -196,6 +198,9 @@
 		0A82A3C817809EF50054C71F /* TPKeyboardAvoidingScrollView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingScrollView.m; sourceTree = "<group>"; };
 		0A82A3C917809EF50054C71F /* TPKeyboardAvoidingTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TPKeyboardAvoidingTableView.h; sourceTree = "<group>"; };
 		0A82A3CA17809EF50054C71F /* TPKeyboardAvoidingTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TPKeyboardAvoidingTableView.m; sourceTree = "<group>"; };
+		0ACB38261782A4E8003B3E66 /* AddfriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddfriendViewController.h; sourceTree = "<group>"; };
+		0ACB38271782A4E8003B3E66 /* AddfriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddfriendViewController.m; sourceTree = "<group>"; };
+		0ACB38281782A4E8003B3E66 /* AddfriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddfriendViewController.xib; sourceTree = "<group>"; };
 		0AFCB9A71780A625009242CC /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = ../NightAfter/Resources/check.png; sourceTree = "<group>"; };
 		0AFCB9A81780A625009242CC /* uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uncheck.png; path = ../NightAfter/Resources/uncheck.png; sourceTree = "<group>"; };
 		0AFCB9AB1780B0B5009242CC /* GreenBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenBar.png; path = Resources/GreenBar.png; sourceTree = "<group>"; };
@@ -334,6 +339,9 @@
 				0A82A391177FD7560054C71F /* MenuViewController.h */,
 				0A82A392177FD7560054C71F /* MenuViewController.m */,
 				0A82A393177FD7560054C71F /* MenuViewController.xib */,
+				0ACB38261782A4E8003B3E66 /* AddfriendViewController.h */,
+				0ACB38271782A4E8003B3E66 /* AddfriendViewController.m */,
+				0ACB38281782A4E8003B3E66 /* AddfriendViewController.xib */,
 				0A82A396177FD9620054C71F /* InboxViewController.h */,
 				0A82A397177FD9620054C71F /* InboxViewController.m */,
 				0A82A398177FD9620054C71F /* InboxViewController.xib */,
@@ -709,6 +717,7 @@
 				0AFCBA0E1780EBAC009242CC /* DetailViewController.xib in Resources */,
 				0AFCBA111780EEAA009242CC /* phil.png in Resources */,
 				0AFCBA121780EEAA009242CC /* wolf.png in Resources */,
+				0ACB382A1782A4E8003B3E66 /* AddfriendViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -757,6 +766,7 @@
 				0A82A3CC17809EF50054C71F /* TPKeyboardAvoidingTableView.m in Sources */,
 				0AFCB9B41780B5D6009242CC /* DateViewController.m in Sources */,
 				0AFCBA0D1780EBAC009242CC /* DetailViewController.m in Sources */,
+				0ACB38291782A4E8003B3E66 /* AddfriendViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

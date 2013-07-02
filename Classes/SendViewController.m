@@ -32,8 +32,10 @@
     
    // NSString *urlString = @"http://107.22.99.26/startup/upload.php";
     User2 *user=[User2 sharedUser];
+    //user.url=@"http://107.22.99.26";
     
-    NSString *urlString2 = @"http://107.22.99.26/startup/schedule.php";
+    NSString *urlString2 = [NSString stringWithFormat:@"%@/startup/schedule.php", user.url];
+    NSLog(@"%@", urlString2);
     
     
     
@@ -49,7 +51,7 @@
     
     NSLog(@"%@", returnString2);
     
-    NSString *urlString = @"http://107.22.99.26/startup/messages.php";
+    NSString *urlString = [NSString stringWithFormat:@"%@/startup/messages.php", user.url];
     
     
     
@@ -92,7 +94,14 @@
     [body appendData:[@"lala" dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
+    //  parameter username
     
+    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"captions\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[@"dada" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    
+    NSLog(@"%@", user.captions);
     
 //    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 //    

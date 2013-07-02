@@ -149,7 +149,7 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     
     //if ([sent isEqualToString:@"1"]){
         inbox_num=inbox_num+1;
-        NSLog(@"%@", user.captions);
+      //  NSLog(@"%@", user.captions);
         user.inbox=[NSString stringWithFormat:@"%d", inbox_num];
         
         
@@ -183,7 +183,7 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
 //            if ([user.captions isEqualToString:@"Captions"]==false){
 //                cell.mer_name.text=user.captions;
 //            }
-            cell.mer_name.text=@"Take a look at these good looking judges:)";
+            cell.mer_name.text=user.captions;
             cell.imgv.image=[UIImage imageNamed:@"heather.jpg"];
             cell.name.text=@"Heather Wilk";
             

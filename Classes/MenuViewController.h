@@ -10,16 +10,20 @@
 #import "MerDiscountsViewController.h"
 #import "InboxViewController.h"
 #import "ImageViewController.h"
+#import "AddfriendViewController.h"
 
 @class MerDiscountsViewController;
 @class InboxViewController;
 @class ImageViewController;
+@class AddfriendViewController;
 
 
 @interface MenuViewController : UIViewController<UIImagePickerControllerDelegate>{
     MerDiscountsViewController *viewmer;
     InboxViewController *viewin;
     ImageViewController *viewimage;
+    
+    AddfriendViewController *viewadd;
     
     IBOutlet UIButton *inbox_but;
     IBOutlet UIButton *camera_but;
@@ -31,6 +35,8 @@
 
 - (IBAction)takePhoto:  (UIButton *)sender;
 - (IBAction)selectPhoto:(UIButton *)sender;
+
+@property (retain, nonatomic) AddfriendViewController *viewadd;
 
 @property (retain, nonatomic) IBOutlet UIImageView *imgv;
 @property (retain, nonatomic) IBOutlet UIImageView *img_photo;
@@ -45,5 +51,7 @@
 
 - (IBAction)inbox;
 - (IBAction)picture;
+
+- (IBAction) Add:(id)sender;
 
 @end
