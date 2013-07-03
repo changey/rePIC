@@ -9,6 +9,8 @@
 #import "SendViewController.h"
 #import "SendCell.h"
 #import "User2.h"
+#import "ASIHTTPRequest.h"
+#import "JSON.h"
 
 @interface SendViewController ()
 
@@ -16,7 +18,55 @@
 
 @implementation SendViewController
 
-@synthesize viewdate, label, viewinbox, btnImage, imageButton;
+@synthesize viewdate, label, viewinbox, btnImage, imageButton, friends, friends_selected;
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+    User2 *user =[User2 sharedUser];
+    
+    label.text=user.date;
+    
+    NSString *url = [NSString stringWithFormat:@"%@/startup/friendslist.php", user.url];  // server name does not match
+    
+    NSURL *URL = [NSURL URLWithString:url];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *returnString;
+    if (!error) {
+        returnString = [request responseString];
+        NSLog(@"%@",returnString);
+    }
+    
+   // NSString *calibrated = [returnString stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    
+    // NSLog(@"the return string: %@", calibrated);
+    
+    NSArray *json = [returnString JSONValue];
+    
+    friends = [[NSMutableArray alloc] init];
+    friends_selected = [[NSMutableArray alloc] init];
+    
+    [friends removeAllObjects];
+    [friends_selected removeAllObjects];
+
+    
+   // NSArray *items2 = [json valueForKeyPath:@"data"];
+    
+    int length = [json count];
+    
+    //[arrayNo2 removeAllObjects];
+    
+    NSString *friend;
+    
+    for (int i=0; i<length;i++){
+         friend=[json objectAtIndex:i];
+        [friends addObject:friend];
+        
+    }
+}
 
 -(IBAction)send{
 //    UIImageView *imageView = [[UIImageView alloc] init];
@@ -75,9 +125,17 @@
     
     //  parameter username
     
+   // NSArray *array = [NSArray arrayWithArray:friends_selected];
+   // NSArray *array = [[NSArray alloc] initWithArray:friends_selected];
+    NSArray *array = [friends_selected copy];
+    
+    NSString *jsonString = [array JSONRepresentation];
+    
+    //NSLog(@"%@", jsonString);
+    
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"receiver\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"heather" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
     //  parameter username
@@ -142,12 +200,6 @@
     [self.navigationController pushViewController:self.viewdate animated:YES];
 }
 
--(void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
-    User2 *user=[User2 sharedUser];
-    
-    label.text=user.date;
-}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -185,7 +237,7 @@
 
 // Customize the number of rows in the table view.
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [friends count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -214,21 +266,11 @@
 	}
     
     if (indexPath.row==0){
-        cell.imgv.image=[UIImage imageNamed:@"heather.jpg"];
-        cell.name.text=@"Heather Wilk";
+        
     }
-//    else if(indexPath.row==1){
-//        cell.imgv.image=[UIImage imageNamed:@"jill.jpg"];
-//        cell.name.text=@"Jill Rosok";
-//    }
-//    else if(indexPath.row==2){
-//        cell.imgv.image=[UIImage imageNamed:@"eric.jpg"];
-//        cell.name.text=@"Eric Chang";
-//    }
-//    else if(indexPath.row==3){
-//        cell.imgv.image=[UIImage imageNamed:@"jace.jpg"];
-//        cell.name.text=@"Jace Lieberman";
-//    }
+    cell.imgv.image=[UIImage imageNamed:@"logo57.png"];
+    cell.name.text=[friends objectAtIndex:indexPath.row];
+
     
     
     //NSString *urlString =@"";
@@ -245,15 +287,18 @@
     SendCell *row = [tableView cellForRowAtIndexPath:indexPath];
     
     
-    if (check_i==0){
+    if ([row.check_s isEqualToString:@"1"]==false){
         [row.check_v setImage:[UIImage imageNamed:@"check.png"]];
-        check_i=1;
+        row.check_s=@"1";
+        [friends_selected addObject:[friends objectAtIndex:indexPath.row]];
     }
     else{
         [row.check_v setImage:[UIImage imageNamed:@"uncheck.png"]];
-        check_i=0;
+        row.check_s=@"0";
+        [friends_selected removeObject:[friends objectAtIndex:indexPath.row]];
     }
     
+    NSLog(@"%d",[friends_selected count]);
     // User *user=[User sharedUser];
     // user.imageNum=[self.mut objectAtIndex:length-indexPath.row-1];
     

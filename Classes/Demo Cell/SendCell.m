@@ -10,7 +10,7 @@
 
 @implementation SendCell
 
-@synthesize check, imgv, name, check_v;
+@synthesize check, imgv, name, check_v, check_s;
 
 -(IBAction)check_a{
     

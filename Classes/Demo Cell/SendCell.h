@@ -14,8 +14,12 @@
     IBOutlet UILabel *name;
     IBOutlet UIImageView *check_v;
     
+    NSString *check_s;
+    
     int check_i;
 }
+@property (strong, nonatomic) NSString *check_s;
+
 @property (strong, nonatomic) IBOutlet UIImageView *check_v;
 
 @property (strong, nonatomic) IBOutlet UIImageView *imgv;

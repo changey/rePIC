@@ -26,8 +26,15 @@
     UIImage *btnImage;
     
     IBOutlet UIButton *imageButton;
+    
+    NSMutableArray *friends;
+    NSMutableArray *friends_selected;
 
 }
+
+@property (strong, nonatomic) NSMutableArray *friends_selected;
+
+@property (strong, nonatomic) NSMutableArray *friends;
 
 @property (strong, nonatomic) IBOutlet UIButton *imageButton;
 
