@@ -53,7 +53,7 @@
     
     // Set the icon badge to zero on startup (optional)
     [[UAPush shared] resetBadge];
-    [[UAPush shared] setAlias:@"changey"];
+    
     
     // Register for remote notfications with the UA Library. With the default value of push set to no,
     // UAPush will record the desired remote notifcation types, but not register for

@@ -22,6 +22,7 @@
 @class ASIHTTPRequest;
 @class MenuViewController;
 @class ImageViewController;
+@class TPKeyboardAvoidingScrollView;
 
 
 @interface RootViewController : UIViewController <UITextFieldDelegate>{
@@ -65,6 +66,8 @@
     NSString *trial;
     NSString *merchant_id;
 }
+
+@property (nonatomic, retain) IBOutlet TPKeyboardAvoidingScrollView *scrollView;
 
 @property (retain, nonatomic)ImageViewController *viewimage;
 

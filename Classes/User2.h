@@ -37,12 +37,15 @@
     UIImage *image;
     
     NSString *date;
+    NSString *date_utc;
+    
     NSString *inbox;
     
     NSString *captions;
 
 	
 }
+@property (retain, nonatomic) NSString *date_utc;
 
 @property (retain, nonatomic)  NSString *captions;
 @property (retain, nonatomic) NSString *inbox;

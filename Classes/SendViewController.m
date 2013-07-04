@@ -49,8 +49,11 @@
     friends = [[NSMutableArray alloc] init];
     friends_selected = [[NSMutableArray alloc] init];
     
-    [friends removeAllObjects];
-    [friends_selected removeAllObjects];
+//    [friends removeAllObjects];
+//    [friends_selected removeAllObjects];
+    
+    //NSLog(@"%@", user.user);
+    //[friends_selected addObject:user.user];
 
     
    // NSArray *items2 = [json valueForKeyPath:@"data"];
@@ -66,40 +69,14 @@
         [friends addObject:friend];
         
     }
+    
+    
 }
 
 -(IBAction)send{
-//    UIImageView *imageView = [[UIImageView alloc] init];
-//    UIGraphicsBeginImageContext(self.view.frame.size);
-//    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
-//    
-//    //UIImage *viewImage = self.imgv.image;
-//    
-//    UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();
-    
-//    NSData *imageData = UIImageJPEGRepresentation(btnImage, 0.02);
-    
-    
-   // NSString *urlString = @"http://107.22.99.26/startup/upload.php";
+
     User2 *user=[User2 sharedUser];
-    //user.url=@"http://107.22.99.26";
-    
-    NSString *urlString2 = [NSString stringWithFormat:@"%@/startup/schedule.php", user.url];
-    NSLog(@"%@", urlString2);
-    
-    
-    
-    NSMutableURLRequest *request2 = [[[NSMutableURLRequest alloc] init] autorelease];
-    [request2 setURL:[NSURL URLWithString:urlString2]];
-    [request2 setHTTPMethod:@"POST"];
-    
-    // [request2 setHTTPBody:body2];
-    
-    // now lets make the connection to the web
-    NSData *returnData2 = [NSURLConnection sendSynchronousRequest:request2 returningResponse:nil error:nil];
-    NSString *returnString2 = [[NSString alloc] initWithData:returnData2 encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"%@", returnString2);
+
     
     NSString *urlString = [NSString stringWithFormat:@"%@/startup/messages.php", user.url];
     
@@ -120,13 +97,15 @@
     
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"sender\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"changey" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[user.user dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
     //  parameter username
     
    // NSArray *array = [NSArray arrayWithArray:friends_selected];
    // NSArray *array = [[NSArray alloc] initWithArray:friends_selected];
+    [friends_selected addObject:user.user];
+    
     NSArray *array = [friends_selected copy];
     
     NSString *jsonString = [array JSONRepresentation];
@@ -134,7 +113,7 @@
     //NSLog(@"%@", jsonString);
     
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"receiver\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"receivers\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
@@ -142,7 +121,7 @@
     
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"time\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"lala" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[user.date_utc dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
     //  parameter username
@@ -153,13 +132,17 @@
     [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
     //  parameter username
+    NSLog(@"%@", user.captions);
+    NSString *captions_correct = [user.captions stringByReplacingOccurrencesOfString: @"\'" withString:@"\\\'"];
+    NSLog(@"%@", captions_correct);
+    
     
     [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"captions\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"dada" dataUsingEncoding:NSUTF8StringEncoding]];
+    [body appendData:[captions_correct dataUsingEncoding:NSUTF8StringEncoding]];
     [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
     
-    NSLog(@"%@", user.captions);
+   // NSLog(@"%@", user.captions);
     
 //    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
 //    

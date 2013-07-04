@@ -9,6 +9,8 @@
 #import "InboxViewController.h"
 #import "CustomCell.h"
 #import "User2.h"
+#import "ASIHTTPRequest.h"
+#import "JSON.h"
 
 @interface InboxViewController ()
 
@@ -16,7 +18,7 @@
 
 @implementation InboxViewController
 
-@synthesize viewimage, sent, btnImage, viewdet;
+@synthesize viewimage, sent, btnImage, viewdet, senders, times, urls, captions;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -27,8 +29,73 @@
     return self;
 }
 
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    
+    User2 *user=[User2 sharedUser];
+    
+    NSString *url = [NSString stringWithFormat:@"%@/startup/inbox.php", user.url];  // server name does not match
+    
+    NSURL *URL = [NSURL URLWithString:url];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *returnString;
+    if (!error) {
+        returnString = [request responseString];
+        NSLog(@"%@",returnString);
+    }
+    
+    // NSString *calibrated = [returnString stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    
+    // NSLog(@"the return string: %@", calibrated);
+    
+    NSArray *json = [returnString JSONValue];
+    
+    senders = [[NSMutableArray alloc] init];
+    urls = [[NSMutableArray alloc] init];
+    times = [[NSMutableArray alloc] init];
+    captions = [[NSMutableArray alloc] init];
+    
+    
+    //NSLog(@"%@", user.user);
+    //[friends_selected addObject:user.user];
+    
+    
+    // NSArray *items2 = [json valueForKeyPath:@"data"];
+    
+    int length = [json count];
+    
+    //[arrayNo2 removeAllObjects];
+    
+    NSString *sender;
+    NSString *url_s;
+    NSString *time;
+    NSString *caption;
+    
+    for (int i=0; i<length;i++){
+        sender=[[json objectAtIndex:i] objectForKey:@"sender"];
+        url_s=[[json objectAtIndex:i] objectForKey:@"url"];
+        time=[[json objectAtIndex:i] objectForKey:@"time"];
+        caption=[[json objectAtIndex:i] objectForKey:@"captions"];
+        [senders addObject:sender];
+        [urls addObject:url_s];
+        [times addObject:time];
+        [captions addObject:caption];
+        //NSLog(@"%@", sender);
+        
+    }
+    
+    [self.tableView reloadData];
+    
+}
+
 -(void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
+    
+    User2 *user =[User2 sharedUser];
+    
     
     if ([sent isEqualToString:@"1"]){
         
@@ -36,7 +103,7 @@
         NSData *imageData = UIImageJPEGRepresentation(btnImage, 0.1);
         
         
-        NSString *urlString = @"http://107.22.99.26/startup/upload.php";
+        NSString *urlString = [NSString stringWithFormat:@"%@/startup/upload.php", user.url];
         
         
         NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
@@ -101,11 +168,11 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     User2 *user=[User2 sharedUser];
     int inbox_num=[user.inbox intValue];
-    return 5;
+    return [senders count];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 90;
+    return 120;
 }
 
 void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^errorBlock)(void) )
@@ -148,83 +215,44 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     int inbox_num=[user.inbox intValue];
     
     //if ([sent isEqualToString:@"1"]){
-        inbox_num=inbox_num+1;
-      //  NSLog(@"%@", user.captions);
-        user.inbox=[NSString stringWithFormat:@"%d", inbox_num];
-        
-        
-        
-        if (indexPath.row==1){
-            cell.mer_name.text=@"Have you seen white doug";
-            cell.imgv.image=[UIImage imageNamed:@"phil.png"];
-            cell.name.text=@"Phil";
-        }
-        else if(indexPath.row==2){
-            cell.mer_name.text=@"Dude, where's your tooth??";
-            cell.imgv.image=[UIImage imageNamed:@"wolf.png"];
-            cell.name.text=@"1manWolfRck";
-        }
-        else if(indexPath.row==3){
-            cell.mer_name.text=@"The internet sucks in here!";
-            cell.imgv.image=[UIImage imageNamed:@"eric.jpg"];
-            cell.name.text=@"Eric Chang";
-        }
-        else if(indexPath.row==4){
-            cell.mer_name.text=@"I bet you can't wait to see this fireworks setup..damn!";
-            cell.imgv.image=[UIImage imageNamed:@"jace.jpg"];
-            cell.name.text=@"Jace Lieberman";
-        }
-        else if(indexPath.row==5){
-            cell.mer_name.text=@"this is awesome";
-            cell.imgv.image=[UIImage imageNamed:@"jace.jpg"];
-            cell.name.text=@"Terry Anderson";
-        }
-        else{
-//            if ([user.captions isEqualToString:@"Captions"]==false){
-//                cell.mer_name.text=user.captions;
-//            }
-            if ([user.captions isEqualToString:@"Captions"]){
-              
-            }
-            else{
-                cell.mer_name.text=user.captions;
-            }
-            cell.mer_name.text=user.captions;
-            cell.imgv.image=[UIImage imageNamed:@"heather.jpg"];
-            cell.name.text=@"Heather Wilk";
-            
-        }
-//    }
-//    else{
-//        if (indexPath.row==0){
-//            cell.mer_name.text=@"No for Jay's, that needs to change.";
-//            cell.imgv.image=[UIImage imageNamed:@"jill.jpg"];
-//            cell.name.text=@"Jill Rosok";
-//        }
-//        else if(indexPath.row==1){
-//            cell.mer_name.text=@"To be a successful business, you need money.";
-//            cell.imgv.image=[UIImage imageNamed:@"heather.jpg"];
-//            cell.name.text=@"Heather Wilk";
-//        }
-//        else if(indexPath.row==2){
-//            cell.mer_name.text=@"The internet sucks in here!";
-//            cell.imgv.image=[UIImage imageNamed:@"eric.jpg"];
-//            cell.name.text=@"Eric Chang";
-//        }
-//        else if(indexPath.row==3){
-//            cell.mer_name.text=@"I bet you can't wait to see this fireworks setup..damn!";
-//            cell.imgv.image=[UIImage imageNamed:@"jace.jpg"];
-//            cell.name.text=@"Jace Lieberman";
-//        }
-//        else if(indexPath.row==4){
-//            cell.mer_name.text=@"this is awesome";
-//            cell.imgv.image=[UIImage imageNamed:@"jace.jpg"];
-//            cell.name.text=@"Terry Anderson";
-//        }
-//        else{
-//            
-//        }
-//    }
+    inbox_num=inbox_num+1;
+    //  NSLog(@"%@", user.captions);
+    user.inbox=[NSString stringWithFormat:@"%d", inbox_num];
+    
+    
+    
+    //        if (indexPath.row==1){
+    //            cell.mer_name.text=@"Have you seen white doug";
+    //            cell.imgv.image=[UIImage imageNamed:@"phil.png"];
+    //            cell.name.text=@"Phil";
+    //        }
+    
+    cell.mer_name.text=[captions objectAtIndex:indexPath.row];
+    cell.imgv.image=[UIImage imageNamed:@"logo57.png"];
+    cell.name.text=[senders objectAtIndex:indexPath.row];
+    
+    // original string
+    //  NSString *str = [NSString stringWithFormat:@"2011-01-13T17:00:00+11:00"];
+    NSString *str = [times objectAtIndex:indexPath.row];
+    
+    // convert to date
+    NSDateFormatter *dateFormat_utc = [[NSDateFormatter alloc] init];
+    // ignore +11 and use timezone name instead of seconds from gmt
+    [dateFormat_utc setDateFormat:@"YYYY-MM-dd' 'HH:mm:ss'"];
+    [dateFormat_utc setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    NSDate *dte = [dateFormat_utc dateFromString:str];
+    // NSLog(@"Date: %@", dte);
+    
+    
+    NSDateFormatter* df = [[[NSDateFormatter alloc] init] autorelease];
+    [df setTimeZone:[NSTimeZone systemTimeZone]];
+    [df setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss'"];
+    
+    NSString *timeString = [df stringFromDate:dte];
+    
+    cell.time.text=timeString;
+    //    }
+    
     
     
     
@@ -238,19 +266,78 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row==0){
-        if(self.viewdet == nil) {
-            DetailViewController *secondxib =
-            [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:[NSBundle mainBundle]];
-            self.viewdet = secondxib;
-            [secondxib release];
+    NSString *str = [times objectAtIndex:indexPath.row];
+    
+    // convert to date
+    NSDateFormatter *dateFormat_utc = [[NSDateFormatter alloc] init];
+    // ignore +11 and use timezone name instead of seconds from gmt
+    [dateFormat_utc setDateFormat:@"YYYY-MM-dd' 'HH:mm:ss'"];
+    [dateFormat_utc setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+    NSDate *dte = [dateFormat_utc dateFromString:str];
+    // NSLog(@"Date: %@", dte);
+    
+    
+    NSDateFormatter* df = [[[NSDateFormatter alloc] init] autorelease];
+    [df setTimeZone:[NSTimeZone systemTimeZone]];
+    [df setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss'"];
+    NSDate *dte_local = [df dateFromString:str];
+    
+   
+    NSDate *currentTime = [NSDate date];
+    NSString *current_str = [df stringFromDate:currentTime];
+    NSString *record = [df stringFromDate:dte_local];
+  //  NSLog(@"current: %@", current_str);
+  //  NSLog(@"record: %@", record);
+    
+    // NSString *
+    switch ([dte_local compare:currentTime]){
+        case NSOrderedAscending:
+            if(self.viewdet == nil) {
+                DetailViewController *secondxib =
+                [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:[NSBundle mainBundle]];
+                self.viewdet = secondxib;
+                [secondxib release];
+            }
+            
+            [self.navigationController pushViewController:self.viewdet animated:YES];
+            //NSLog(@"NSOrderedAscending");
+            break;
+        case NSOrderedSame:{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uh-oh, time is not up yet"
+                                                            message:@""
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+            [alert show];
+            [alert release];
+         //   NSLog(@"NSOrderedSame");
+        
+            break;
+        }
+        case NSOrderedDescending:{
+            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Uh-oh, time is not up yet"
+                                                            message:@""
+                                                           delegate:self
+                                                  cancelButtonTitle:nil
+                                                  otherButtonTitles:@"OK", nil];
+            [alert show];
+            [alert release];
+            
+        //    NSLog(@"NSOrderedDescending");
+            break;
         }
         
-        [self.navigationController pushViewController:self.viewdet animated:YES];
+            
+            
+            // User *user=[User sharedUser];
+            // user.imageNum=[self.mut objectAtIndex:length-indexPath.row-1];
+            
+            
     }
     
-    // User *user=[User sharedUser];
-    // user.imageNum=[self.mut objectAtIndex:length-indexPath.row-1];
+    if (indexPath.row==0){
+        
+    }
     
     
 }

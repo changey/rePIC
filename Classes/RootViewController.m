@@ -17,6 +17,8 @@
 #import "UAAnalytics.h"
 #import "UAUser.h"
 
+#import "TPKeyboardAvoidingScrollView.h"
+
 @interface NSURLRequest (DummyInterface)
 //+ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
 //+ (void)setAllowsAnyHTTPSCertificate:(BOOL)allow forHost:(NSString*)host;
@@ -94,7 +96,7 @@
         user.pass=@"1";
         
         //user.url=@"https://172.17.164.70";
-        user.url=@"https://107.22.99.26";
+        user.url=@"https://172.17.164.70";
 		
         
 		
@@ -239,22 +241,23 @@
     
     [pass resignFirstResponder];
     User2 *user3=[User2 sharedUser];
-    user3.user=@"changey";
+  //  user3.user=@"changey";
  //   [[UAirship shared] registerDeviceToken:user3.deviceToken withAlias:@"changey"];
   //  [[UAPush shared] updateAlias:user3.user];
-    NSLog(@"%@", [[UAPush shared] alias]);
+    NSLog(@"%@", user2);
+    user3.user=user2;
    // [[UAUser defaultUser] setAlias:@"changey"];
-    [[UAPush shared] setAlias:@"changey"];
+    [[UAPush shared] setAlias:user2];
     
     
     // if([response isEqualToString:@"0"]){
-    if([user2 isEqualToString:@"test"]){
-        
-        
-    }
-    //else if([response isEqualToString:@"1"]){
-    else if([user2 isEqualToString:@"test2"]){
-        
+//    if([user2 isEqualToString:@"test"]){
+//        
+//        
+//    }
+//    //else if([response isEqualToString:@"1"]){
+//    else if([user2 isEqualToString:@"test2"]){
+    
         if(self.viewmenu == nil) {
             MenuViewController *secondxib =
             [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:[NSBundle mainBundle]];
@@ -264,13 +267,13 @@
         
         [self.navigationController pushViewController:self.viewmenu animated:YES];
         
-    }
-    else{
-        UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username/Password invalid"
-                                                              delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertsuccess show];
-        [alertsuccess release];
-    }
+//    }
+//    else{
+//        UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username/Password invalid"
+//                                                              delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        [alertsuccess show];
+//        [alertsuccess release];
+//    }
 }
 
 -(IBAction)connect
@@ -334,7 +337,7 @@
     //user2.url=@"http://172.17.164.70";
     user2.url=@"http://107.22.99.26";
     
-    user.text=@"test2";
+    user.text=@"changey";
     pass.text=@"1";
     [self.navigationController setNavigationBarHidden:YES];
     pass.returnKeyType = UIReturnKeyGo;

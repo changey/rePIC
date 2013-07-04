@@ -18,7 +18,11 @@
     IBOutlet UILabel *mer_name;
     IBOutlet UILabel *mer_address;
     IBOutlet UILabel *name;
+    
+    IBOutlet UILabel *time;
 }
+
+@property (nonatomic,retain) IBOutlet UILabel *time;
 
 @property (nonatomic,retain) IBOutlet UILabel *name;
 

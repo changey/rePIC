@@ -96,15 +96,22 @@
     
     if (indexPath.row==0){
         NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-        [dateFormatter setDateStyle:NSDateFormatterShortStyle];
-        [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+       // [dateFormatter setDateStyle:NSDateFormatterShortStyle];
+       // [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+        [dateFormatter setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss'"];
+        
+        NSDateFormatter* df_utc = [[[NSDateFormatter alloc] init] autorelease];
+        [df_utc setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
+        [df_utc setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss'"];
         
         selectedDate = datePicker.date;
         NSString *timeString = [dateFormatter stringFromDate:selectedDate];
+        NSString *timeString_utc=[df_utc stringFromDate:selectedDate];
         NSLog(@"%@", selectedDate);
         
         User2 *user=[User2 sharedUser];
         user.date=timeString;
+        user.date_utc=timeString_utc;
         
         cell.textLabel.text=timeString;
     NSLog(@"lala");

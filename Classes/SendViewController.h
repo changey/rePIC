@@ -29,8 +29,12 @@
     
     NSMutableArray *friends;
     NSMutableArray *friends_selected;
+    
+    IBOutlet UITableView *tableView;
 
 }
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) NSMutableArray *friends_selected;
 

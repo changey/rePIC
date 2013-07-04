@@ -12,7 +12,7 @@
 @implementation CustomCell
 
 @synthesize stateLabel;
-@synthesize capitalLabel, imgv, address, mer_name, mer_address, name;
+@synthesize capitalLabel, imgv, address, mer_name, mer_address, name, time;
 
 - (id)initWithFrame:(CGRect)frame reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithFrame:frame reuseIdentifier:reuseIdentifier]) {

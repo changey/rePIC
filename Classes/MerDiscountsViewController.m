@@ -34,7 +34,6 @@
 -(IBAction)send{
     UIImageView *imageView = [[UIImageView alloc] init];
     UIGraphicsBeginImageContext(self.view.frame.size);
-    [self.view.layer renderInContext:UIGraphicsGetCurrentContext()];
     
    // self.imgv=[[UIImageView alloc] init];
    // UIImage *viewImage = UIGraphicsGetImageFromCurrentImageContext();

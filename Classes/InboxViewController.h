@@ -23,9 +23,23 @@
     
     UIImage *btnImage;
     
+    NSMutableArray *senders;
+    NSMutableArray *times;
+    NSMutableArray *urls;
+    NSMutableArray *captions;
+    
+    IBOutlet UITableView *tableView;
+    
 }
 
 - (IBAction) Back:(id)sender;
+
+@property (retain, nonatomic) IBOutlet UITableView *tableView;
+
+@property (retain, nonatomic)NSMutableArray *senders;
+@property (retain, nonatomic)NSMutableArray *times;
+@property (retain, nonatomic)NSMutableArray *urls;
+@property (retain, nonatomic)NSMutableArray *captions;
 
 @property (retain, nonatomic) DetailViewController *viewdet;
 
