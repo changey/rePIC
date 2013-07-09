@@ -140,23 +140,6 @@
         NSLog(@"%@",returnString);
     }
     
-    // [NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[URL host]];
-    
-    /*  NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-     
-     NSURLResponse *response;
-     NSError *error = nil;
-     NSData *data = [NSURLConnection sendSynchronousRequest: request returningResponse: &response error: &error];
-     
-     //NSString *urlString = [NSString stringWithFormat:@"http://gsuccessprep.com/pa12/rnlogin2.php?user=%@&pass=%@",user2,pass2];
-     //http://107.21.202.8/
-     // NSLog(@"%@", urlString);
-     
-     // NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString: urlString]];
-     NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-     
-     NSLog(@"the return string: %@", returnString);*/
-    
     
     user.user=user2;
     user.pass=pass2;
@@ -200,17 +183,28 @@
     NSString *user2=user.text;
     NSString *pass2=pass.text;
     
-    [pass resignFirstResponder];
     User2 *user3=[User2 sharedUser];
-  //  user3.user=@"changey";
- //   [[UAirship shared] registerDeviceToken:user3.deviceToken withAlias:@"changey"];
-  //  [[UAPush shared] updateAlias:user3.user];
-    NSLog(@"%@", user2);
-    user3.user=user2;
-   // [[UAUser defaultUser] setAlias:@"changey"];
-    [[UAPush shared] setAlias:user2];
     
+    [pass resignFirstResponder];
     
+    NSString *url = [NSString stringWithFormat:@"%@/startup/rnlogin2.php?user=%@&pass=%@",user3.url,user2,pass2];  // server name does not match
+    NSURL *URL = [NSURL URLWithString:url];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *returnString;
+    if (!error) {
+        returnString = [request responseString];
+        NSLog(@"%@",returnString);
+    }
+    
+    if ([returnString isEqualToString:@"1"]){
+        NSLog(@"%@", user2);
+        user3.user=user2;
+        // [[UAUser defaultUser] setAlias:@"changey"];
+        [[UAPush shared] setAlias:user2];
+ 
         if(self.viewmenu == nil) {
             MenuViewController *secondxib =
             [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:[NSBundle mainBundle]];
@@ -219,50 +213,6 @@
         }
         
         [self.navigationController pushViewController:self.viewmenu animated:YES];
-        
-//    }
-//    else{
-//        UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username/Password invalid"
-//                                                              delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-//        [alertsuccess show];
-//        [alertsuccess release];
-//    }
-}
-
--(IBAction)connect
-{
-    
-    
-    NSString *user2=user.text;
-    NSString *pass2=pass.text;
-    
-    
-    int auth=0;
-    
-    if(auth!=1){
-        
-    }
-    //  NSString *urlString = [NSString stringWithFormat:@"http://gsuccessprep.com/pa12/rnlogin2.php?user=%@&pass=%@",user2,pass2];
-    NSString *urlString = [NSString stringWithFormat:@"http://gsuccessprep.com/pa12/rnlogin2.php?user=%@&pass=%@",user2,pass2];
-    //http://107.21.202.8/
-    
-    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString: urlString]];
-    NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"the return string: %@", returnString);
-    
-    User2 *user=[User2 sharedUser];
-    user.user=user2;
-    user.pass=pass2;
-    
-    if([returnString isEqualToString:@"0"]){
-        //    if([user2 isEqualToString:@"Wei.God"]){
-        
-        
-    }
-    else if([returnString isEqualToString:@"1"]){
-        //   else if([user2 isEqualToString:@"Wei.God2"]){
-        
     }
     else{
         UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Error" message:@"Username/Password invalid"
@@ -270,8 +220,8 @@
         [alertsuccess show];
         [alertsuccess release];
     }
-    //}
     
+
 }
 
 
@@ -290,8 +240,8 @@
     //user2.url=@"http://172.17.164.70";
     user2.url=@"http://107.22.99.26";
     
-    user.text=@"changey";
-    pass.text=@"1";
+    user.text=@"";
+    pass.text=@"";
     [self.navigationController setNavigationBarHidden:YES];
     pass.returnKeyType = UIReturnKeyGo;
     

@@ -9,11 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "ImageViewController.h"
 #import "DetailViewController.h"
+#import "MenuViewController.h"
 
 @class ImageViewController;
 @class DetailViewController;
+@class MenuViewController;
 
 @interface InboxViewController : UIViewController<UITableViewDelegate, UITableViewDataSource>{
+    
+    MenuViewController *viewmenu;
     
     DetailViewController *viewdet;
     
@@ -36,6 +40,8 @@
 }
 
 - (IBAction) Back:(id)sender;
+
+@property (retain, nonatomic) MenuViewController *viewmenu;
 
 @property (retain, nonatomic) NSString *messages_number;
 @property (retain, nonatomic) NSString *receiver_number;

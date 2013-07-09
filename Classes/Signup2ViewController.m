@@ -10,6 +10,11 @@
 #import "JSON.h"
 #import "User2.h"
 
+#import "UAirship.h"
+#import "UAPush.h"
+#import "UAAnalytics.h"
+#import "UAUser.h"
+
 @interface Signup2ViewController ()
 
 @end
@@ -23,9 +28,9 @@
     NSString *user2=user.text;
     NSString *pass2=pass.text;
     
-    User2 *user=[User2 sharedUser];
+    User2 *user3=[User2 sharedUser];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/post_signup.php?user=%@&pass=%@",user.url, user2,pass2];
+    NSString *urlString = [NSString stringWithFormat:@"%@/startup/post_signup.php?user=%@&pass=%@", user3.url, user2,pass2];
     
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString: urlString]];
     NSString *returnString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
@@ -33,8 +38,8 @@
     NSLog(@"the return string: %@", returnString);
     
     
-    user.user=user2;
-    user.pass=pass2;
+    user3.user=user2;
+    user3.pass=pass2;
     
     if([returnString isEqualToString:@"0"]){
         //    if([user2 isEqualToString:@"Wei.God"]){
@@ -45,6 +50,10 @@
         [alertsuccess release];
     }
     else if([returnString isEqualToString:@"1"]){
+        user3.user=user2;
+        // [[UAUser defaultUser] setAlias:@"changey"];
+        [[UAPush shared] setAlias:user2];
+        
         if(self.viewmenu == nil) {
             MenuViewController *secondxib =
             [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:[NSBundle mainBundle]];
@@ -85,6 +94,11 @@
         // Custom initialization
     }
     return self;
+}
+
+-(void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    [self.navigationController setNavigationBarHidden:NO];
 }
 
 - (void)viewDidLoad

@@ -118,6 +118,8 @@
     User2 *user= [User2 sharedUser];
     user.imgv.image=[[UIImage alloc] init];
     
+    self.navigationItem.hidesBackButton = YES;
+    
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithTitle:@"Add Friends" style:UIBarButtonItemStyleBordered target:self action:@selector(Add:)];
 	[self.navigationItem setRightBarButtonItem:addButton];
     

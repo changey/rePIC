@@ -18,7 +18,7 @@
 
 @implementation InboxViewController
 
-@synthesize viewimage, sent, btnImage, viewdet, senders, times, urls, captions, messages_number, receiver_number;
+@synthesize viewimage, sent, btnImage, viewdet, senders, times, urls, captions, messages_number, receiver_number, viewmenu;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -34,7 +34,7 @@
     
     User2 *user=[User2 sharedUser];
     
-    NSString *url = [NSString stringWithFormat:@"%@/startup/inbox.php", user.url];  // server name does not match
+    NSString *url = [NSString stringWithFormat:@"%@/startup/inbox.php?user=%@", user.url, user.user];  // server name does not match
     
     NSURL *URL = [NSURL URLWithString:url];
     
@@ -155,7 +155,9 @@
         NSLog(@"%@", returnString);
     }
     
-    NSString *url = [NSString stringWithFormat:@"%@/startup/inbox.php", user.url];  // server name does not match
+    NSLog(@"%@", user.user);
+    
+    NSString *url = [NSString stringWithFormat:@"%@/startup/inbox.php?user=%@", user.url, user.user];  // server name does not match
     
     NSURL *URL = [NSURL URLWithString:url];
     
@@ -165,7 +167,7 @@
     NSString *returnString;
     if (!error) {
         returnString = [request responseString];
-        //  NSLog(@"%@",returnString);
+          NSLog(@"%@",returnString);
     }
     
     // NSString *calibrated = [returnString stringByReplacingOccurrencesOfString:@"_" withString:@" "];
@@ -206,17 +208,23 @@
 {
     [super viewDidLoad];
     
-    //    self.navigationItem.hidesBackButton = YES;
-    //
-    //    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(Back:)];
-    //	[self.navigationItem setLeftBarButtonItem:backButton];
+        self.navigationItem.hidesBackButton = YES;
+    
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStyleBordered target:self action:@selector(Back:)];
+    	[self.navigationItem setLeftBarButtonItem:backButton];
     
     self.title=@"Inbox";
     // Do any additional setup after loading the view from its nib.
 }
 
 - (IBAction) Back:(id)sender{
-	[self.navigationController popToRootViewControllerAnimated:YES];
+    MenuViewController *secondxib =
+    [[MenuViewController alloc] initWithNibName:@"MenuViewController" bundle:[NSBundle mainBundle]];
+    self.viewmenu = secondxib;
+    [secondxib release];
+    UINavigationController *navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewmenu];
+    
+	[self.navigationController popToViewController:[self.navigationController.viewControllers objectAtIndex:1] animated:YES];
     
 }
 
