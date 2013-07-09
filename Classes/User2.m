@@ -12,7 +12,7 @@ static User2 *sharedUser = nil;
 
 @synthesize user, pass;
 
-@synthesize merchant_id, merchant_section, item, promotion, url, deviceToken, imgv, image, date, inbox, captions, date_utc;
+@synthesize merchant_id, merchant_section, item, promotion, url, deviceToken, imgv, image, date, inbox, captions, date_utc, messages_number, receiver_number;
 
 int hours, minutes, seconds;
 int secondsLeft;

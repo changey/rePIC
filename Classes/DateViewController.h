@@ -18,9 +18,13 @@
     InboxViewController *viewinbox;
     
     NSDate* selectedDate;
+    
+    NSString *url;
 }
 
 - (IBAction) Done:(id)sender;
+
+@property(nonatomic,retain) NSString *url;
 
 @property(nonatomic,retain) InboxViewController *viewinbox;
 

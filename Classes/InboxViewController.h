@@ -30,9 +30,15 @@
     
     IBOutlet UITableView *tableView;
     
+    NSString *messages_number;
+    NSString *receiver_number;
+    
 }
 
 - (IBAction) Back:(id)sender;
+
+@property (retain, nonatomic) NSString *messages_number;
+@property (retain, nonatomic) NSString *receiver_number;
 
 @property (retain, nonatomic) IBOutlet UITableView *tableView;
 

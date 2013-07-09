@@ -14,7 +14,7 @@
 
 @implementation DetailViewController
 
-@synthesize imgv;
+@synthesize imgv, url;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -29,7 +29,8 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-//    NSURL * imageURL = [NSURL URLWithString:@"http://107.22.99.26/startup/uploads/2.jpg"];
+//    NSLog(@"%@", url);
+//    NSURL * imageURL = [NSURL URLWithString:url];
 //    NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
 //    imgv.image = [UIImage imageWithData:imageData];
 }
@@ -37,7 +38,8 @@
 - (void) viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
     
-    NSURL * imageURL = [NSURL URLWithString:@"http://107.22.99.26/2.jpg"];
+    NSLog(@"%@", url);
+    NSURL * imageURL = [NSURL URLWithString:url];
     NSData * imageData = [NSData dataWithContentsOfURL:imageURL];
     imgv.image = [UIImage imageWithData:imageData];
 }

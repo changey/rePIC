@@ -15,7 +15,7 @@
 
 @implementation DateViewController
 
-@synthesize datePicker, tableView, viewinbox;
+@synthesize datePicker, tableView, viewinbox, url;
 
 -(IBAction)send{
     if(self.viewinbox == nil) {

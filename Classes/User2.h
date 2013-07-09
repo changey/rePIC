@@ -42,9 +42,16 @@
     NSString *inbox;
     
     NSString *captions;
+    
+    NSString *messages_number;
+    NSString *receiver_number;
 
 	
 }
+
+@property (retain, nonatomic) NSString *messages_number;
+@property (retain, nonatomic) NSString *receiver_number;
+
 @property (retain, nonatomic) NSString *date_utc;
 
 @property (retain, nonatomic)  NSString *captions;

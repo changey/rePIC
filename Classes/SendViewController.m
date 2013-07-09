@@ -160,11 +160,36 @@
     
     NSLog(@"%@", returnString);
     
+    NSDictionary *json2 = [returnString JSONValue];
+    
+    //NSString
+    
+    NSLog(@"%@", [json2 objectForKey:@"messages_number"]);
+    NSLog(@"%@", [json2 objectForKey:@"receiver_number"]);
+    
+    NSString *messages_number=[json2 objectForKey:@"messages_number"];
+    NSString *receiver_number=[json2 objectForKey:@"receiver_number"];
+    
+    user.messages_number=messages_number;
+    user.receiver_number=receiver_number;
+    
+//    NSString *str;//Pass your string to str
+//    NSArray *str_array = [str componentsSeparatedByString:@","];
+    
+//    for(int i=0; i<[str_array count]; i++){
+//        
+//        //Here just take strings one by one
+//        
+//    }
+    //NSLog(@"%@", [str_array objectAtIndex:0]);
+   // NSLog(@"%@", [str_array objectAtIndex:3]);
+    
     if(self.viewinbox == nil) {
         InboxViewController *secondxib =
         [[InboxViewController alloc] initWithNibName:@"InboxViewController" bundle:[NSBundle mainBundle]];
         secondxib.sent=@"1";
         secondxib.btnImage=btnImage;
+        
         self.viewinbox  = secondxib;
         [secondxib release];
     }
