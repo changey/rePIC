@@ -105,53 +105,14 @@
 }
 
 -(IBAction)signup{
-    //    NSString *user2=user.text;
-    //    NSString *pass2=pass.text;
-    //
-    //    User2 *user=[User2 sharedUser];
-    //
-    //    user.url=@"http://107.22.99.26";
-    //
-    //    NSString *url = [NSString stringWithFormat:@"%@/post_signup.php?user=%@&pass=%@",user.url, user2,pass2];  // server name does not match
-    //
-    //    NSLog(@"%@", url);
-    //
-    //    NSURL *URL = [NSURL URLWithString:url];
-    //
-    //    //[NSURLRequest setAllowsAnyHTTPSCertificate:YES forHost:[URL host]];
-    //
-    //    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
-    //    [request startSynchronous];
-    //    NSError *error = [request error];
-    //    NSString *returnString;
-    //    if (!error) {
-    //        returnString = [request responseString];
-    //        NSLog(@"%@",returnString);
-    //    }
-    //
-    //    NSLog(@"the return string: %@", returnString);
-    //
-    //    user.user=user2;
-    //    user.pass=pass2;
-    //
-    //    if([returnString isEqualToString:@"0"]){
-    //        //    if([user2 isEqualToString:@"Wei.God"]){
-    //
-    //        UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Error" message:@"That username already exists"
-    //                                                              delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //        [alertsuccess show];
-    //        [alertsuccess release];
-    //    }
-    //    else if([returnString isEqualToString:@"1"]){
-    //        //   else if([user2 isEqualToString:@"Wei.God2"]){
-    //
-    //    }
-    //    else{
-    //        UIAlertView *alertsuccess = [[UIAlertView alloc] initWithTitle:@"Error" message:@"That username already exists"
-    //                                                              delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    //        [alertsuccess show];
-    //        [alertsuccess release];
-    //    }
+    if(self.viewsign == nil) {
+        Signup2ViewController *secondxib =
+        [[Signup2ViewController alloc] initWithNibName:@"Signup2ViewController" bundle:[NSBundle mainBundle]];
+        self.viewsign = secondxib;
+        [secondxib release];
+    }
+    
+    [self.navigationController pushViewController:self.viewsign animated:YES];
     
     
 }
@@ -249,14 +210,6 @@
    // [[UAUser defaultUser] setAlias:@"changey"];
     [[UAPush shared] setAlias:user2];
     
-    
-    // if([response isEqualToString:@"0"]){
-//    if([user2 isEqualToString:@"test"]){
-//        
-//        
-//    }
-//    //else if([response isEqualToString:@"1"]){
-//    else if([user2 isEqualToString:@"test2"]){
     
         if(self.viewmenu == nil) {
             MenuViewController *secondxib =

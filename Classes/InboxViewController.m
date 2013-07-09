@@ -18,7 +18,7 @@
 
 @implementation InboxViewController
 
-@synthesize viewimage, sent, btnImage, viewdet, senders, times, urls, captions;
+@synthesize viewimage, sent, btnImage, viewdet, senders, times, urls, captions, messages_number, receiver_number;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -44,7 +44,7 @@
     NSString *returnString;
     if (!error) {
         returnString = [request responseString];
-        NSLog(@"%@",returnString);
+      //  NSLog(@"%@",returnString);
     }
     
     // NSString *calibrated = [returnString stringByReplacingOccurrencesOfString:@"_" withString:@" "];
@@ -122,6 +122,29 @@
         [body appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
         [body appendData:[NSData dataWithData:imageData]];
         [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //NSLog(@"%@", jsonString);
+        NSLog(@"%@", user.messages_number);
+        NSString *messages_number_s=[NSString stringWithFormat:@"%@", user.messages_number];
+        NSString *messages_number_s2 = [messages_number_s stringByReplacingOccurrencesOfString:@" " withString:@""];
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"messages_number\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[messages_number_s2 dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //NSLog(@"%@", jsonString);
+        NSLog(@"%@", user.receiver_number);
+        
+        NSString *receiver_number_s=[NSString stringWithFormat:@"%@", user.receiver_number];
+        NSString *receiver_number_s2 = [receiver_number_s stringByReplacingOccurrencesOfString:@" " withString:@""];
+        NSLog(@"%@", receiver_number_s2);
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"receiver_number\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[receiver_number_s2 dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
         // setting the body of the post to the reqeust
         [request setHTTPBody:body];
         
@@ -131,6 +154,52 @@
         
         NSLog(@"%@", returnString);
     }
+    
+    NSString *url = [NSString stringWithFormat:@"%@/startup/inbox.php", user.url];  // server name does not match
+    
+    NSURL *URL = [NSURL URLWithString:url];
+    
+    ASIHTTPRequest *request = [ASIHTTPRequest requestWithURL:URL];
+    [request startSynchronous];
+    NSError *error = [request error];
+    NSString *returnString;
+    if (!error) {
+        returnString = [request responseString];
+        //  NSLog(@"%@",returnString);
+    }
+    
+    // NSString *calibrated = [returnString stringByReplacingOccurrencesOfString:@"_" withString:@" "];
+    
+    // NSLog(@"the return string: %@", calibrated);
+    
+    NSArray *json = [returnString JSONValue];
+
+    urls = [[NSMutableArray alloc] init];
+    
+    
+    //NSLog(@"%@", user.user);
+    //[friends_selected addObject:user.user];
+    
+    
+    // NSArray *items2 = [json valueForKeyPath:@"data"];
+    
+    int length = [json count];
+    
+    //[arrayNo2 removeAllObjects];
+    
+    NSString *url_s;
+
+    
+    for (int i=0; i<length;i++){
+        url_s=[[json objectAtIndex:i] objectForKey:@"url"];
+
+        [urls addObject:url_s];
+
+    }
+    
+    [self.tableView reloadData];
+    
+    
 }
 
 - (void)viewDidLoad
@@ -238,7 +307,7 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     // convert to date
     NSDateFormatter *dateFormat_utc = [[NSDateFormatter alloc] init];
     // ignore +11 and use timezone name instead of seconds from gmt
-    [dateFormat_utc setDateFormat:@"YYYY-MM-dd' 'HH:mm:ss'"];
+    [dateFormat_utc setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss'"];
     [dateFormat_utc setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     NSDate *dte = [dateFormat_utc dateFromString:str];
     // NSLog(@"Date: %@", dte);
@@ -265,8 +334,9 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
 
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSString *str = [times objectAtIndex:indexPath.row];
+
+    NSString *str = [NSString stringWithFormat:@"%@",[times objectAtIndex:indexPath.row]];
+    NSLog(@"%@", str);
     
     // convert to date
     NSDateFormatter *dateFormat_utc = [[NSDateFormatter alloc] init];
@@ -278,16 +348,23 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
     
     
     NSDateFormatter* df = [[[NSDateFormatter alloc] init] autorelease];
-    [df setTimeZone:[NSTimeZone systemTimeZone]];
+    [df setTimeZone:[NSTimeZone timeZoneWithName:@"UTC"]];
     [df setDateFormat:@"yyyy'-'MM'-'dd' 'HH':'mm':'ss'"];
     NSDate *dte_local = [df dateFromString:str];
+    
+   // NSTimeZone* destinationTimeZone = [NSTimeZone systemTimeZone];
+   // [df setTimeZone:destinationTimeZone];
     
    
     NSDate *currentTime = [NSDate date];
     NSString *current_str = [df stringFromDate:currentTime];
     NSString *record = [df stringFromDate:dte_local];
-  //  NSLog(@"current: %@", current_str);
-  //  NSLog(@"record: %@", record);
+    NSLog(@"current: %@", currentTime);
+    NSLog(@"record: %@", dte_local);
+    
+    NSTimeZone *timeZone = [NSTimeZone systemTimeZone]; // This will store the timezone of the device in the NSTimeZone object, timeZone
+    
+    NSLog(@"TIME ZONE = %@",timeZone);
     
     // NSString *
     switch ([dte_local compare:currentTime]){
@@ -295,6 +372,8 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
             if(self.viewdet == nil) {
                 DetailViewController *secondxib =
                 [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:[NSBundle mainBundle]];
+                secondxib.url=[urls objectAtIndex:indexPath.row];
+                secondxib.captions=[captions objectAtIndex:indexPath.row];
                 self.viewdet = secondxib;
                 [secondxib release];
             }
@@ -310,6 +389,17 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
                                                   otherButtonTitles:@"OK", nil];
             [alert show];
             [alert release];
+            
+//            if(self.viewdet == nil) {
+//                DetailViewController *secondxib =
+//                [[DetailViewController alloc] initWithNibName:@"DetailViewController" bundle:[NSBundle mainBundle]];
+//                secondxib.url=[urls objectAtIndex:indexPath.row];
+//                
+//                self.viewdet = secondxib;
+//                [secondxib release];
+//            }
+//            
+//            [self.navigationController pushViewController:self.viewdet animated:YES];
          //   NSLog(@"NSOrderedSame");
         
             break;
@@ -322,7 +412,7 @@ void UIImageFromURL( NSURL * URL, void (^imageBlock)(UIImage * image), void (^er
                                                   otherButtonTitles:@"OK", nil];
             [alert show];
             [alert release];
-            
+                        
         //    NSLog(@"NSOrderedDescending");
             break;
         }

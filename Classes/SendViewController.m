@@ -47,16 +47,8 @@
     NSArray *json = [returnString JSONValue];
     
     friends = [[NSMutableArray alloc] init];
-    friends_selected = [[NSMutableArray alloc] init];
-    
-//    [friends removeAllObjects];
-//    [friends_selected removeAllObjects];
-    
-    //NSLog(@"%@", user.user);
-    //[friends_selected addObject:user.user];
+  //  friends_selected = [[NSMutableArray alloc] init];
 
-    
-   // NSArray *items2 = [json valueForKeyPath:@"data"];
     
     int length = [json count];
     
@@ -76,100 +68,129 @@
 -(IBAction)send{
 
     User2 *user=[User2 sharedUser];
-
+    NSLog(@"%@", user.date);
     
-    NSString *urlString = [NSString stringWithFormat:@"%@/startup/messages.php", user.url];
-    
-    
-    
-    NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
-    [request setURL:[NSURL URLWithString:urlString]];
-    [request setHTTPMethod:@"POST"];
-    
-    NSString *boundary = [NSString stringWithString:@"---------------------------14737809831466499882746641449"];
-    NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
-    [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
-    
-    
-    NSMutableData *body = [NSMutableData data];
-    
-    //  parameter username
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"sender\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[user.user dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    //  parameter username
-    
-   // NSArray *array = [NSArray arrayWithArray:friends_selected];
-   // NSArray *array = [[NSArray alloc] initWithArray:friends_selected];
-    [friends_selected addObject:user.user];
-    
-    NSArray *array = [friends_selected copy];
-    
-    NSString *jsonString = [array JSONRepresentation];
-    
-    //NSLog(@"%@", jsonString);
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"receivers\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    //  parameter username
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"time\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[user.date_utc dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    //  parameter username
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"url\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[@"lala" dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-    //  parameter username
-    NSLog(@"%@", user.captions);
-    NSString *captions_correct = [user.captions stringByReplacingOccurrencesOfString: @"\'" withString:@"\\\'"];
-    NSLog(@"%@", captions_correct);
-    
-    
-    [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"captions\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[captions_correct dataUsingEncoding:NSUTF8StringEncoding]];
-    [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-    
-   // NSLog(@"%@", user.captions);
-    
-//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-//    
-//    [body appendData:[[NSString stringWithString:@"Content-Disposition: form-data; name=\"image\"; filename=\"dr3.jpg\"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-//    
-//    [body appendData:[[NSString stringWithString:@"Content-Type: application/octet-stream\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
-//    [body appendData:[NSData dataWithData:imageData]];
-//    [body appendData:[[NSString stringWithFormat:@"\r\n--%@--\r\n",boundary] dataUsingEncoding:NSUTF8StringEncoding]];
-    // setting the body of the post to the reqeust
-    [request setHTTPBody:body];
-    
-    // now lets make the connection to the web
-    NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
-    NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
-    
-    NSLog(@"%@", returnString);
-    
-    if(self.viewinbox == nil) {
-        InboxViewController *secondxib =
-        [[InboxViewController alloc] initWithNibName:@"InboxViewController" bundle:[NSBundle mainBundle]];
-        secondxib.sent=@"1";
-        secondxib.btnImage=btnImage;
-        self.viewinbox  = secondxib;
-        [secondxib release];
+    if (user.date==NULL){
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Please select a deliver time"
+                                                        message:@""
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"OK", nil];
+        [alert show];
+        [alert release];
+        
     }
-    
-    [self.navigationController pushViewController:self.viewinbox animated:YES];
+    else{
+        
+        NSString *urlString = [NSString stringWithFormat:@"%@/startup/messages.php", user.url];
+        
+        
+        
+        NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] init] autorelease];
+        [request setURL:[NSURL URLWithString:urlString]];
+        [request setHTTPMethod:@"POST"];
+        
+        NSString *boundary = [NSString stringWithString:@"---------------------------14737809831466499882746641449"];
+        NSString *contentType = [NSString stringWithFormat:@"multipart/form-data; boundary=%@",boundary];
+        [request addValue:contentType forHTTPHeaderField: @"Content-Type"];
+        
+        
+        NSMutableData *body = [NSMutableData data];
+        
+        //  parameter username
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"sender\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[user.user dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //  parameter username
+        
+        [user.friends_selected addObject:user.user];
+        
+        NSArray *array = [user.friends_selected copy];
+        
+        NSString *jsonString = [array JSONRepresentation];
+        
+        //NSLog(@"%@", jsonString);
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"receivers\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[jsonString dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //  parameter username
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"time\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[user.date_utc dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //  parameter username
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"url\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[@"lala" dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        //  parameter username
+        NSLog(@"%@", user.captions);
+        NSString *captions_correct = [user.captions stringByReplacingOccurrencesOfString: @"\'" withString:@"\\\'"];
+        NSLog(@"%@", captions_correct);
+        
+        
+        [body appendData:[[NSString stringWithFormat:@"--%@\r\n", boundary] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithFormat:@"Content-Disposition: form-data; name=\"captions\"\r\n\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[captions_correct dataUsingEncoding:NSUTF8StringEncoding]];
+        [body appendData:[[NSString stringWithString:@"\r\n"] dataUsingEncoding:NSUTF8StringEncoding]];
+        
+        // NSLog(@"%@", user.captions);
+        
+        // setting the body of the post to the reqeust
+        [request setHTTPBody:body];
+        
+        // now lets make the connection to the web
+        NSData *returnData = [NSURLConnection sendSynchronousRequest:request returningResponse:nil error:nil];
+        NSString *returnString = [[NSString alloc] initWithData:returnData encoding:NSUTF8StringEncoding];
+        
+        NSLog(@"%@", returnString);
+        
+        NSDictionary *json2 = [returnString JSONValue];
+        
+        //NSString
+        
+        NSLog(@"%@", [json2 objectForKey:@"messages_number"]);
+        NSLog(@"%@", [json2 objectForKey:@"receiver_number"]);
+        
+        NSString *messages_number=[json2 objectForKey:@"messages_number"];
+        NSString *receiver_number=[json2 objectForKey:@"receiver_number"];
+        
+        user.messages_number=messages_number;
+        user.receiver_number=receiver_number;
+        
+        //    NSString *str;//Pass your string to str
+        //    NSArray *str_array = [str componentsSeparatedByString:@","];
+        
+        //    for(int i=0; i<[str_array count]; i++){
+        //
+        //        //Here just take strings one by one
+        //
+        //    }
+        //NSLog(@"%@", [str_array objectAtIndex:0]);
+        // NSLog(@"%@", [str_array objectAtIndex:3]);
+        
+        if(self.viewinbox == nil) {
+            InboxViewController *secondxib =
+            [[InboxViewController alloc] initWithNibName:@"InboxViewController" bundle:[NSBundle mainBundle]];
+            secondxib.sent=@"1";
+            secondxib.btnImage=btnImage;
+            
+            self.viewinbox  = secondxib;
+            [secondxib release];
+        }
+        
+        [self.navigationController pushViewController:self.viewinbox animated:YES];
+    }
 }
 
 -(IBAction)date_a{
@@ -202,6 +223,9 @@
     [imageButton setImage:btnImage forState:UIControlStateNormal];
     
     check_i=0;
+    
+    User2 *user=[User2 sharedUser];
+    user.friends_selected=[[NSMutableArray alloc] init];
     // Do any additional setup after loading the view from its nib.
 }
 
@@ -268,20 +292,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     SendCell *row = [tableView cellForRowAtIndexPath:indexPath];
+    User2 *user=[User2 sharedUser];
     
     
     if ([row.check_s isEqualToString:@"1"]==false){
         [row.check_v setImage:[UIImage imageNamed:@"check.png"]];
         row.check_s=@"1";
-        [friends_selected addObject:[friends objectAtIndex:indexPath.row]];
+        [user.friends_selected addObject:[friends objectAtIndex:indexPath.row]];
     }
     else{
         [row.check_v setImage:[UIImage imageNamed:@"uncheck.png"]];
         row.check_s=@"0";
-        [friends_selected removeObject:[friends objectAtIndex:indexPath.row]];
+        [user.friends_selected removeObject:[friends objectAtIndex:indexPath.row]];
     }
     
-    NSLog(@"%d",[friends_selected count]);
+    NSLog(@"%d",[user.friends_selected count]);
     // User *user=[User sharedUser];
     // user.imageNum=[self.mut objectAtIndex:length-indexPath.row-1];
     

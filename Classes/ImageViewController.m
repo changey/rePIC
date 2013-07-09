@@ -154,6 +154,7 @@
     UIImage *image=[UIImage imageNamed:@"logo57.jpg"];
     imgv.image=user.image;
     [imageButton setImage:btnImage forState:UIControlStateNormal];
+    user.captions=@"";
     
 }
 

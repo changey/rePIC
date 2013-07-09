@@ -3,11 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>5144EBB9-7E8F-45A7-8515-51D37E921F08</string>
+	<string>6D0169F9-F891-47AA-BC9E-B581EADA8639</string>
 	<key>IDESourceControlProjectName</key>
 	<string>NB_list</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
+		<key>1E02A4AF-FF1F-465C-922A-A5A2BA99C937</key>
+		<string>ssh://github.com/changey/rePIC.git</string>
 		<key>AED2CA33-525A-4058-8355-13980B79C58D</key>
 		<string>ssh://github.com/weihuali0509/ProjectAwesome.git</string>
 	</dict>
@@ -15,17 +17,27 @@
 	<string>NB_list.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>AED2CA33-525A-4058-8355-13980B79C58D</key>
+		<key>1E02A4AF-FF1F-465C-922A-A5A2BA99C937</key>
 		<string>../..</string>
+		<key>AED2CA33-525A-4058-8355-13980B79C58D</key>
+		<string>../../../NightAfter</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>ssh://github.com/weihuali0509/ProjectAwesome.git</string>
+	<string>ssh://github.com/changey/rePIC.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>AED2CA33-525A-4058-8355-13980B79C58D</string>
+	<string>1E02A4AF-FF1F-465C-922A-A5A2BA99C937</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1E02A4AF-FF1F-465C-922A-A5A2BA99C937</string>
+			<key>IDESourceControlWCCName</key>
+			<string>rePIC</string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

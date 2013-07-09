@@ -14,6 +14,7 @@
 		0A039B10177F976E001EF14C /* libUAirship-1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A039B0C177F976E001EF14C /* libUAirship-1.4.0.a */; };
 		0A039B12177F98A8001EF14C /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A039B11177F98A8001EF14C /* libsqlite3.dylib */; };
 		0A039B13177F98BF001EF14C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 422DD27A1625FCBA000268BB /* CoreTelephony.framework */; };
+		0A0AF18B178BD10B002D7E5E /* signup_clean.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A0AF18A178BD10B002D7E5E /* signup_clean.png */; };
 		0A2699AC164DF9D90053E455 /* FbGraph.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2699A7164DF9D90053E455 /* FbGraph.m */; };
 		0A2699AD164DF9D90053E455 /* FbGraphFile.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2699A9164DF9D90053E455 /* FbGraphFile.m */; };
 		0A2699AE164DF9D90053E455 /* FbGraphResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A2699AB164DF9D90053E455 /* FbGraphResponse.m */; };
@@ -144,6 +145,7 @@
 		0A039B0C177F976E001EF14C /* libUAirship-1.4.0.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libUAirship-1.4.0.a"; sourceTree = "<group>"; };
 		0A039B0E177F976E001EF14C /* UAPush.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAPush.h; sourceTree = "<group>"; };
 		0A039B11177F98A8001EF14C /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		0A0AF18A178BD10B002D7E5E /* signup_clean.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = signup_clean.png; path = Resources/signup_clean.png; sourceTree = "<group>"; };
 		0A2699A6164DF9D90053E455 /* FbGraph.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FbGraph.h; sourceTree = "<group>"; };
 		0A2699A7164DF9D90053E455 /* FbGraph.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FbGraph.m; sourceTree = "<group>"; };
 		0A2699A8164DF9D90053E455 /* FbGraphFile.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FbGraphFile.h; sourceTree = "<group>"; };
@@ -336,6 +338,9 @@
 				28C286DF0D94DF7D0034E888 /* RootViewController.h */,
 				42A089E614D6C5C00038DDFE /* RootViewController.m */,
 				28F335F01007B36200424DE2 /* RootViewController.xib */,
+				97B2BA5C16347D6E008D22E2 /* Signup2ViewController.h */,
+				97B2BA5D16347D6E008D22E2 /* Signup2ViewController.m */,
+				97B2BA5E16347D6E008D22E2 /* Signup2ViewController.xib */,
 				0A82A391177FD7560054C71F /* MenuViewController.h */,
 				0A82A392177FD7560054C71F /* MenuViewController.m */,
 				0A82A393177FD7560054C71F /* MenuViewController.xib */,
@@ -360,9 +365,6 @@
 				0AFCBA0A1780EBAA009242CC /* DetailViewController.h */,
 				0AFCBA0B1780EBAB009242CC /* DetailViewController.m */,
 				0AFCBA0C1780EBAB009242CC /* DetailViewController.xib */,
-				97B2BA5C16347D6E008D22E2 /* Signup2ViewController.h */,
-				97B2BA5D16347D6E008D22E2 /* Signup2ViewController.m */,
-				97B2BA5E16347D6E008D22E2 /* Signup2ViewController.xib */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -505,6 +507,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				0A0AF18A178BD10B002D7E5E /* signup_clean.png */,
 				0AFCBA0F1780EEAA009242CC /* phil.png */,
 				0AFCBA101780EEAA009242CC /* wolf.png */,
 				0AFCB9AF1780B448009242CC /* next.png */,
@@ -718,6 +721,7 @@
 				0AFCBA111780EEAA009242CC /* phil.png in Resources */,
 				0AFCBA121780EEAA009242CC /* wolf.png in Resources */,
 				0ACB382A1782A4E8003B3E66 /* AddfriendViewController.xib in Resources */,
+				0A0AF18B178BD10B002D7E5E /* signup_clean.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -813,8 +817,8 @@
 					"\"$(SRCROOT)/urbanairship\"",
 				);
 				PRODUCT_NAME = NB_list;
-				PROVISIONING_PROFILE = "274B738C-55EB-4F07-BB0F-0BC9018F31E4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "274B738C-55EB-4F07-BB0F-0BC9018F31E4";
+				PROVISIONING_PROFILE = "9843FBA9-A965-4ECE-8685-66866D7FDBE0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9843FBA9-A965-4ECE-8685-66866D7FDBE0";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$SDK_DIR/usr/include/libxml2/**";
 				VALIDATE_PRODUCT = YES;
@@ -847,8 +851,8 @@
 					"\"$(SRCROOT)/urbanairship\"",
 				);
 				PRODUCT_NAME = NB_list;
-				PROVISIONING_PROFILE = "274B738C-55EB-4F07-BB0F-0BC9018F31E4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "274B738C-55EB-4F07-BB0F-0BC9018F31E4";
+				PROVISIONING_PROFILE = "9843FBA9-A965-4ECE-8685-66866D7FDBE0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9843FBA9-A965-4ECE-8685-66866D7FDBE0";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$SDK_DIR/usr/include/libxml2/**";
 				VALID_ARCHS = armv7;
@@ -878,8 +882,8 @@
 					"\"$(SRCROOT)/urbanairship\"",
 				);
 				PRODUCT_NAME = NB_list;
-				PROVISIONING_PROFILE = "274B738C-55EB-4F07-BB0F-0BC9018F31E4";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "274B738C-55EB-4F07-BB0F-0BC9018F31E4";
+				PROVISIONING_PROFILE = "9843FBA9-A965-4ECE-8685-66866D7FDBE0";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "9843FBA9-A965-4ECE-8685-66866D7FDBE0";
 				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "$SDK_DIR/usr/include/libxml2/**";
 				VALIDATE_PRODUCT = YES;
