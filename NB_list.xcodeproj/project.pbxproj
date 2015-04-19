@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		0499184F144880BD00B77D2E /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0499184E144880BD00B77D2E /* iAd.framework */; };
-		0A039ABC177F66D5001EF14C /* logo57.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A039ABB177F66D5001EF14C /* logo57.png */; };
 		0A039ABE177F6708001EF14C /* logo57.png in Resources */ = {isa = PBXBuildFile; fileRef = 0A039ABD177F6708001EF14C /* logo57.png */; };
 		0A039B0F177F976E001EF14C /* AirshipConfig.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A039AEF177F976D001EF14C /* AirshipConfig.plist */; };
 		0A039B10177F976E001EF14C /* libUAirship-1.4.0.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A039B0C177F976E001EF14C /* libUAirship-1.4.0.a */; };
@@ -50,8 +49,6 @@
 		0A82A3CC17809EF50054C71F /* TPKeyboardAvoidingTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A82A3CA17809EF50054C71F /* TPKeyboardAvoidingTableView.m */; };
 		0ACB38291782A4E8003B3E66 /* AddfriendViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ACB38271782A4E8003B3E66 /* AddfriendViewController.m */; };
 		0ACB382A1782A4E8003B3E66 /* AddfriendViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0ACB38281782A4E8003B3E66 /* AddfriendViewController.xib */; };
-		0AFCB9A91780A625009242CC /* check.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9A71780A625009242CC /* check.png */; };
-		0AFCB9AA1780A625009242CC /* uncheck.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9A81780A625009242CC /* uncheck.png */; };
 		0AFCB9AD1780B0B5009242CC /* GreenBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9AB1780B0B5009242CC /* GreenBar.png */; };
 		0AFCB9AE1780B0B5009242CC /* YellowBar.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9AC1780B0B5009242CC /* YellowBar.png */; };
 		0AFCB9B01780B448009242CC /* next.png in Resources */ = {isa = PBXBuildFile; fileRef = 0AFCB9AF1780B448009242CC /* next.png */; };
@@ -112,7 +109,6 @@
 /* Begin PBXFileReference section */
 		046EE466143EC09A00C9E4F4 /* Entitlements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Entitlements.plist; sourceTree = "<group>"; };
 		0499184E144880BD00B77D2E /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
-		0A039ABB177F66D5001EF14C /* logo57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = logo57.png; path = ../logo57.png; sourceTree = "<group>"; };
 		0A039ABD177F6708001EF14C /* logo57.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo57.png; sourceTree = "<group>"; };
 		0A039AEF177F976D001EF14C /* AirshipConfig.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = AirshipConfig.plist; sourceTree = "<group>"; };
 		0A039AF1177F976D001EF14C /* UAAnalytics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UAAnalytics.h; sourceTree = "<group>"; };
@@ -203,8 +199,6 @@
 		0ACB38261782A4E8003B3E66 /* AddfriendViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddfriendViewController.h; sourceTree = "<group>"; };
 		0ACB38271782A4E8003B3E66 /* AddfriendViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddfriendViewController.m; sourceTree = "<group>"; };
 		0ACB38281782A4E8003B3E66 /* AddfriendViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddfriendViewController.xib; sourceTree = "<group>"; };
-		0AFCB9A71780A625009242CC /* check.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = check.png; path = ../NightAfter/Resources/check.png; sourceTree = "<group>"; };
-		0AFCB9A81780A625009242CC /* uncheck.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uncheck.png; path = ../NightAfter/Resources/uncheck.png; sourceTree = "<group>"; };
 		0AFCB9AB1780B0B5009242CC /* GreenBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = GreenBar.png; path = Resources/GreenBar.png; sourceTree = "<group>"; };
 		0AFCB9AC1780B0B5009242CC /* YellowBar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = YellowBar.png; path = Resources/YellowBar.png; sourceTree = "<group>"; };
 		0AFCB9AF1780B448009242CC /* next.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = next.png; path = Resources/next.png; sourceTree = "<group>"; };
@@ -514,8 +508,6 @@
 				0AFCB9AB1780B0B5009242CC /* GreenBar.png */,
 				0AFCB9AC1780B0B5009242CC /* YellowBar.png */,
 				0A82A3C4178006520054C71F /* homepage_plain.png */,
-				0AFCB9A71780A625009242CC /* check.png */,
-				0AFCB9A81780A625009242CC /* uncheck.png */,
 				0A82A3C2178001600054C71F /* cell.png */,
 				0A82A3AE177FEF030054C71F /* eric.jpg */,
 				0A82A3AF177FEF030054C71F /* heather.jpg */,
@@ -526,7 +518,6 @@
 				0A82A3AC177FE85E0054C71F /* background_green.png */,
 				0A82A3A8177FE79A0054C71F /* Camera.png */,
 				0A82A3A9177FE79A0054C71F /* Inbox.png */,
-				0A039ABB177F66D5001EF14C /* logo57.png */,
 				9704EFD916346F57000E8E32 /* login-text.png */,
 				970FEBE316345BE00010FBAD /* fb-connect.png */,
 				970FEBEB163466460010FBAD /* blue_button.png */,
@@ -692,7 +683,6 @@
 				970FEBEC163466460010FBAD /* blue_button.png in Resources */,
 				9704EFDA16346F57000E8E32 /* login-text.png in Resources */,
 				97B2BA6016347D6E008D22E2 /* Signup2ViewController.xib in Resources */,
-				0A039ABC177F66D5001EF14C /* logo57.png in Resources */,
 				0A039ABE177F6708001EF14C /* logo57.png in Resources */,
 				0A039B0F177F976E001EF14C /* AirshipConfig.plist in Resources */,
 				0A82A395177FD7560054C71F /* MenuViewController.xib in Resources */,
@@ -711,8 +701,6 @@
 				0A82A3C1177FF28A0054C71F /* ImageViewController.xib in Resources */,
 				0A82A3C3178001600054C71F /* cell.png in Resources */,
 				0A82A3C5178006520054C71F /* homepage_plain.png in Resources */,
-				0AFCB9A91780A625009242CC /* check.png in Resources */,
-				0AFCB9AA1780A625009242CC /* uncheck.png in Resources */,
 				0AFCB9AD1780B0B5009242CC /* GreenBar.png in Resources */,
 				0AFCB9AE1780B0B5009242CC /* YellowBar.png in Resources */,
 				0AFCB9B01780B448009242CC /* next.png in Resources */,
@@ -798,10 +786,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yao-Wen Chang (36669NUEY2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yao-Wen Chang (36669NUEY2)";
@@ -811,7 +796,7 @@
 				GCC_PREFIX_HEADER = NB_list_Prefix.pch;
 				HEADER_SEARCH_PATHS = "../Airship/**";
 				INFOPLIST_FILE = "NB_list-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/urbanairship\"",
@@ -830,10 +815,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yao-Wen Chang (36669NUEY2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yao-Wen Chang (36669NUEY2)";
@@ -845,7 +827,7 @@
 				GCC_PREFIX_HEADER = NB_list_Prefix.pch;
 				HEADER_SEARCH_PATHS = "../Airship/**";
 				INFOPLIST_FILE = "NB_list-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/urbanairship\"",
@@ -863,10 +845,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = (
-					armv6,
-					"$(ARCHS_STANDARD_32_BIT)",
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Yao-Wen Chang (36669NUEY2)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Yao-Wen Chang (36669NUEY2)";
@@ -876,7 +855,7 @@
 				GCC_PREFIX_HEADER = NB_list_Prefix.pch;
 				HEADER_SEARCH_PATHS = "../Airship/**";
 				INFOPLIST_FILE = "NB_list-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/urbanairship\"",
