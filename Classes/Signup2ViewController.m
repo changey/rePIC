@@ -10,7 +10,6 @@
 #import "JSON.h"
 #import "User2.h"
 
-#import "UAirship.h"
 #import "UAPush.h"
 #import "UAAnalytics.h"
 #import "UAUser.h"

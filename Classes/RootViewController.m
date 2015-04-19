@@ -12,7 +12,6 @@
 #import "User2.h"
 #import "ASIHTTPRequest.h"
 
-#import "UAirship.h"
 #import "UAPush.h"
 #import "UAAnalytics.h"
 #import "UAUser.h"

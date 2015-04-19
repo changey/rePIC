@@ -10,7 +10,6 @@
 #import "RootViewController.h"
 #import "User2.h"
 
-#import "UAirship.h"
 #import "UAPush.h"
 #import "UAAnalytics.h"
 
@@ -42,14 +41,16 @@
     
     //Create Airship options dictionary and add the required UIApplication launchOptions
     NSMutableDictionary *takeOffOptions = [NSMutableDictionary dictionary];
-    [takeOffOptions setValue:launchOptions forKey:UAirshipTakeOffOptionsLaunchOptionsKey];
+   
+    // [takeOffOptions setValue:launchOptions forKey:UAirshipTakeOffOptionsLaunchOptionsKey];
     
     // Call takeOff (which creates the UAirship singleton), passing in the launch options so the
     // library can properly record when the app is launched from a push notification. This call is
     // required.
     //
     // Populate AirshipConfig.plist with your app's info from https://go.urbanairship.com
-    [UAirship takeOff:takeOffOptions];
+   
+    // [UAirship takeOff:takeOffOptions];
     
     // Set the icon badge to zero on startup (optional)
     [[UAPush shared] resetBadge];
@@ -59,14 +60,15 @@
     // UAPush will record the desired remote notifcation types, but not register for
     // push notfications as mentioned above. When push is enabled at a later time, the registration
     // will occur normally. This call is required.
-    [[UAPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
-                                                         UIRemoteNotificationTypeSound |
-                                                         UIRemoteNotificationTypeAlert)];
-    
+//    [[UAPush shared] registerForRemoteNotificationTypes:(UIRemoteNotificationTypeBadge |
+//                                                         UIRemoteNotificationTypeSound |
+//                                                         UIRemoteNotificationTypeAlert)];
+//    
     // Handle any incoming incoming push notifications.
     // This will invoke `handleBackgroundNotification` on your UAPushNotificationDelegate.
-    [[UAPush shared] handleNotification:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]
-                       applicationState:application.applicationState];
+    
+//    [[UAPush shared] handleNotification:[launchOptions valueForKey:UIApplicationLaunchOptionsRemoteNotificationKey]
+//                       applicationState:application.applicationState];
 
     
     
@@ -79,7 +81,7 @@
     
     return YES;
 }
-
+//
 - (void)application:(UIApplication*)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData*)deviceToken
 {
     NSLog(@"My token is: %@", deviceToken);
